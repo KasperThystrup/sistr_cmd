@@ -2,7 +2,7 @@ import logging
 import numpy as np
 import pandas as pd
 import json
-import cPickle
+import pickle
 from pathlib import Path
 
 def listattrs(x):
