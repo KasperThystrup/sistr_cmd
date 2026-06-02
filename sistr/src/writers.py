@@ -155,11 +155,14 @@ def write(dest, fmt, serovar_predictions, more_results=0):
     elif more_results == 1:
         exclude_keys_in_output.remove('sseq')
     if fmt in {'pickle', 'json'}:
+        
         output_dict = [to_dict(v, 0, exclude_keys=exclude_keys_in_output) for v in serovar_predictions]
         if fmt == 'json':
-            json.dump(output, fh)
+            with open(dest, "w") as fh:
+                json.dump(output_dict, fh)
         else:
-            cPickle.dump(output, fh)
+            with open(dest, "wb") as fh:
+                pickle.dump(output_dict, fh)
     else:
         if more_results > 0:
             output_dict = [flatten_dict(to_dict(v, 0, exclude_keys=exclude_keys_in_output)) for v in
